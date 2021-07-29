@@ -32,7 +32,7 @@ export default function todosReducer(state = initialState, action) {
     case CREATE_TODO:
       return {
         ...state, 
-        todos: [...state.todos, action.payload]
+        todos: [action.payload, ...state.todos]
       };
     case DELETE_TODO:
       return {
