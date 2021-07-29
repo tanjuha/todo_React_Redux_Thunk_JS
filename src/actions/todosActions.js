@@ -1,4 +1,4 @@
-import { TODOS_HAS_ERRORED, TODOS_IS_LOADING, TODOS, DELETE_TODO, EDIT_TODO } from "./actionTypes";
+import { TODOS_HAS_ERRORED, TODOS_IS_LOADING, TODOS, DELETE_TODO, EDIT_TODO, CREATE_TODO } from "./actionTypes";
 
 export function todosHasErrored(payload) {
   return {
@@ -31,6 +31,13 @@ export function deleteTodo(payload) {
 export function editTodo(payload) {
   return {
     type: EDIT_TODO, 
+    payload
+  }
+}
+
+export function createTodo(payload) {
+  return {
+    type: CREATE_TODO, 
     payload
   }
 }

@@ -1,6 +1,6 @@
 import { deleteTodo, todos, todosIsLoading } from "../actions/todosActions";
 import { todosHasErrored } from "../actions/todosActions";
-import { editTodo } from "../actions/todosActions";
+import { editTodo, createTodo } from "../actions/todosActions";
 
 const url = "https://jsonplaceholder.typicode.com/todos";
 
@@ -52,5 +52,28 @@ export function updateTodo(id) {
       .then((response) => {
         dispatch(editTodo(response));
       });
+  };
+}
+
+export function addTodo(data) {
+  return (dispatch) => {
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: Date.now(),
+        title: data.title,
+        completed: true,
+      }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        return dispatch(createTodo(response));
+      })
+      .catch(() => dispatch(todosHasErrored(true)));
   };
 }

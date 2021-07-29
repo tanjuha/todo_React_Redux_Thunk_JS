@@ -4,6 +4,7 @@ import {
   TODOS_HAS_ERRORED,
   DELETE_TODO,
   EDIT_TODO,
+  CREATE_TODO,
 } from "../actions/actionTypes";
 const initialState = {
   todos: [],
@@ -27,6 +28,11 @@ export default function todosReducer(state = initialState, action) {
       return {
         ...state,
         error: action.payload,
+      };
+    case CREATE_TODO:
+      return {
+        ...state, 
+        todos: [...state.todos, action.payload]
       };
     case DELETE_TODO:
       return {

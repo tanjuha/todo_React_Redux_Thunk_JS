@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Todos from "../../conteiners/Todos";
+import CreateTodo from './../../conteiners/CreateTodo';
 
 class Home extends Component{
   onSingOut = () => {
@@ -15,6 +16,7 @@ class Home extends Component{
         <button onClick={this.onSingOut} className="btn btn-danger m-2">
           Sing Out
         </button>
+        <CreateTodo/>
         <div className="container">
           <Todos/>
         </div>
