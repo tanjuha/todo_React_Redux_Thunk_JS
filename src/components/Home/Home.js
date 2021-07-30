@@ -13,7 +13,7 @@ class Home extends Component{
   render() {
     return (
       <>
-        <button onClick={this.onSingOut} className="btn btn-danger m-2">
+        <button onClick={this.onSingOut} className="btn btn-danger m-2 d-block ms-auto">
           Sing Out
         </button>
         <CreateTodo/>

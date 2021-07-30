@@ -10,21 +10,25 @@ export default class EditTodo extends Component {
 
   handleSubmit = (value) => {
     const id = this.props.match.params.id;
-    this.props.editTodo({id, ...value});
+    this.props.editTodo({ id, ...value });
+    this.props.history.push("/");
   };
 
   render() {
     return (
-      <>
-        <h1>Edit form </h1>
-        <EditTodoForm onSubmit={this.handleSubmit} />
-      </>
+      <div className="container">
+        <div className="row justify-content-md-center">
+          <div className="col-6">
+            <h2>Edit form </h2>
+            <EditTodoForm onSubmit={this.handleSubmit} />
+          </div>
+        </div>
+      </div>
     );
   }
 }
 
 let EditTodoForm = (props) => {
-
   return (
     <form onSubmit={props.handleSubmit}>
       <div className="form-group">
@@ -36,7 +40,7 @@ let EditTodoForm = (props) => {
           type="text"
         />
       </div>
-      <button type="submit" className="btn btn-primary btn-block">
+      <button type="submit" className="btn btn-primary btn-block mt-2 d-block ms-auto">
         Submit
       </button>
     </form>

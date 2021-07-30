@@ -13,8 +13,14 @@ export default class SingIn extends Component {
   render() {
     return (
       <div className="container">
-        <SingInForm onSubmit={this.handleSubmit} />
+      <div className="row justify-content-md-center">
+        <div className="col-6">
+          <h2>Sing In</h2>
+          <SingInForm onSubmit={this.handleSubmit} />
+        </div>
       </div>
+    </div>
+  
     );
   }
 }
@@ -30,7 +36,7 @@ let SingInForm = (props) =>  {
       <label>Password</label>
       <Field name="password"  className="form-control" component="input" type="password"/>
     </div>
-    <button type="submit" className="btn btn-primary btn-block">
+    <button type="submit" className="btn btn-primary btn-block mt-2 d-block ms-auto">
       Submit
     </button>
   </form>
