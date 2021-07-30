@@ -1,5 +1,6 @@
 import {
   TODOS,
+  TODO,
   TODOS_IS_LOADING,
   TODOS_HAS_ERRORED,
   DELETE_TODO,
@@ -8,6 +9,7 @@ import {
 } from "../actions/actionTypes";
 const initialState = {
   todos: [],
+  todo: [],
   isLoading: false,
   error: false,
 };
@@ -18,6 +20,11 @@ export default function todosReducer(state = initialState, action) {
       return {
         ...state,
         todos: action.payload,
+      };
+      case TODO:
+      return {
+        ...state,
+        todo: action.payload,
       };
     case TODOS_IS_LOADING:
       return {

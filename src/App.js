@@ -12,6 +12,7 @@ import SingIn from "./conteiners/SingIn";
 import rootReducer from "./reducers/rootReducer";
 import thunk from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
+import EditTodo from "./conteiners/EditTodo";
 
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
@@ -25,6 +26,7 @@ function App() {
             <SingIn />
           </Route>
           <PrivateRoute exact path="/" component={Home} />
+          <PrivateRoute exact path="/edit/:id" component={EditTodo} />
         </Switch>
       </Router>
     </Provider>

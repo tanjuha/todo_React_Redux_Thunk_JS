@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import Todos from "../components/Todos/Todos";
 import { deleteFetchTodo, getTodos } from "../thunk/todoThunk";
-import { updateTodo } from '../thunk/todoThunk';
+import { withRouter } from 'react-router-dom';
 
 function mapStateToProps(state) {
   return {
@@ -13,10 +13,10 @@ function mapStateToProps(state) {
 function  mapDispatchToProps (dispatch) {
     return {
         getTodos: () => dispatch(getTodos()),
-        deleteTodo: (id) => dispatch(deleteFetchTodo(id)),
-        editTodo: (id) => dispatch(updateTodo(id))
+        deleteTodo: (id) => dispatch(deleteFetchTodo(id))
     }
     
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Todos)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Todos)
+)

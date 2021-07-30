@@ -1,10 +1,14 @@
 import React from "react";
 import { Component } from "react";
 
-export default class Todos extends Component{
+export default class Todos extends Component {
   componentDidMount() {
     this.props.getTodos();
   }
+
+  updateTodo = (id) => {
+    this.props.history.push(`/edit/${id}`);
+  };
 
   render() {
     if (this.props.isLoading) {
@@ -22,9 +26,12 @@ export default class Todos extends Component{
             >
               Delete
             </button>
-            <button 
-            onClick={() => this.props.editTodo(todo.id)}
-            className="btn btn-info mx-2">Edit</button>
+            <button
+              onClick={() => this.updateTodo(todo.id)}
+              className="btn btn-info mx-2"
+            >
+              Edit
+            </button>
           </div>
         </div>
       );

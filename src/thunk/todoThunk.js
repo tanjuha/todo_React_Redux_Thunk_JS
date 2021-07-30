@@ -1,6 +1,6 @@
 import { deleteTodo, todos, todosIsLoading } from "../actions/todosActions";
 import { todosHasErrored } from "../actions/todosActions";
-import { editTodo, createTodo } from "../actions/todosActions";
+import { editTodo, createTodo, todo } from "../actions/todosActions";
 
 const url = "https://jsonplaceholder.typicode.com/todos";
 
@@ -24,6 +24,21 @@ export function getTodos() {
   };
 }
 
+export function getTodo(id) {
+  return (dispatch) => {
+    fetch(`${url}/${id}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((data) => dispatch(todo(data)))
+      .catch(() => dispatch(todosHasErrored(true)));
+  };
+}
+
 export function deleteFetchTodo(id) {
   return (dispatch) => {
     fetch(`${url}/${id}`, {
@@ -34,14 +49,14 @@ export function deleteFetchTodo(id) {
   };
 }
 
-export function updateTodo(id) {
+export function updateTodo({id, title}) {
   return (dispatch) => {
     fetch(`${url}/${id}`, {
       method: "PUT",
       body: JSON.stringify({
-        userId: 1,
-        id: 1972,
-        title: "test test",
+        userId: id,
+        id: id,
+        title,
         completed: true,
       }),
       headers: {
