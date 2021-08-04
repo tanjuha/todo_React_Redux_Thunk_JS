@@ -1,6 +1,11 @@
 import { deleteTodo, todos, todosIsLoading } from "../actions/todosActions";
 import { todosHasErrored } from "../actions/todosActions";
-import { editTodo, createTodo, todo } from "../actions/todosActions";
+import {
+  editTodo,
+  createTodo,
+  todo,
+  updateStatusTodo,
+} from "../actions/todosActions";
 
 const url = "https://jsonplaceholder.typicode.com/todos";
 
@@ -49,7 +54,7 @@ export function deleteFetchTodo(id) {
   };
 }
 
-export function updateTodo({id, title}) {
+export function updateTodo({ id, title }) {
   return (dispatch) => {
     fetch(`${url}/${id}`, {
       method: "PUT",
@@ -57,7 +62,7 @@ export function updateTodo({id, title}) {
         userId: id,
         id: id,
         title,
-        completed: true,
+        completed: false,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -80,7 +85,7 @@ export function addTodo(data) {
       body: JSON.stringify({
         userId: Date.now(),
         title: data.title,
-        completed: true,
+        completed: false,
       }),
     })
       .then((response) => {
@@ -90,5 +95,23 @@ export function addTodo(data) {
         return dispatch(createTodo(response));
       })
       .catch(() => dispatch(todosHasErrored(true)));
+  };
+}
+
+export function changeStatusTodo(id) {
+  return (dispatch) => {
+    fetch(`${url}/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        completed: true,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        dispatch(updateStatusTodo(response));
+      });
   };
 }

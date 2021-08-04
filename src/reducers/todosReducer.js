@@ -6,6 +6,7 @@ import {
   DELETE_TODO,
   EDIT_TODO,
   CREATE_TODO,
+  UPDATE_STATUS_TODO,
 } from "../actions/actionTypes";
 const initialState = {
   todos: [],
@@ -21,7 +22,7 @@ export default function todosReducer(state = initialState, action) {
         ...state,
         todos: action.payload,
       };
-      case TODO:
+    case TODO:
       return {
         ...state,
         todo: action.payload,
@@ -38,14 +39,29 @@ export default function todosReducer(state = initialState, action) {
       };
     case CREATE_TODO:
       return {
-        ...state, 
-        todos: [action.payload, ...state.todos]
+        ...state,
+        todos: [action.payload, ...state.todos],
       };
     case DELETE_TODO:
       return {
         ...state,
         todos: state.todos.filter((todo) => todo.id !== action.payload),
       };
+    case UPDATE_STATUS_TODO:
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          if (todo.id === action.payload.id) {
+            return {
+              ...todo,
+              ...action.payload,
+            };
+          } else {
+            return todo;
+          }
+        }),
+      };
+
     case EDIT_TODO:
       return {
         ...state,
