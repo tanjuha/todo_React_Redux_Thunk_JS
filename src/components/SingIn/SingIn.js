@@ -1,49 +1,68 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
+import {
+  email,
+  required,
+  minLength5,
+  maxLength15,
+} from "../../utils/validationRules";
+import RenderField from "../common/RenderField";
 
 export default class SingIn extends Component {
-
-  
   handleSubmit = (values) => {
     // Do something with the form values
-    localStorage.setItem('user', JSON.stringify(values));
-    localStorage.setItem('isAuthenticated', true);
-    this.props.history.push("/")
-  }
+    localStorage.setItem("user", JSON.stringify(values));
+    localStorage.setItem("isAuthenticated", true);
+    this.props.history.push("/");
+  };
   render() {
     return (
       <div className="container">
-      <div className="row justify-content-md-center">
-        <div className="col-6">
-          <h2>Sing In</h2>
-          <SingInForm onSubmit={this.handleSubmit} />
+        <div className="row justify-content-md-center">
+          <div className="col-6">
+            <h2>Sing In</h2>
+            <SingInForm onSubmit={this.handleSubmit} />
+          </div>
         </div>
       </div>
-    </div>
-  
     );
   }
 }
 
-let SingInForm = (props) =>  {
+let SingInForm = ({ handleSubmit, valid }) => {
   return (
-    <form onSubmit={props.handleSubmit}>
-    <div className="form-group">
-      <label>Email</label>
-      <Field name="email"  className="form-control" component="input" type="text"/>
-    </div>
-    <div className="form-group">
-      <label>Password</label>
-      <Field name="password"  className="form-control" component="input" type="password"/>
-    </div>
-    <button type="submit" className="btn btn-primary btn-block mt-2 d-block ms-auto">
-      Submit
-    </button>
-  </form>
-  )
-}
-
+    <form onSubmit={handleSubmit}>
+      <div className="form-group">
+        <Field
+          component={RenderField}
+          name="email"
+          type="email"
+          label="Email"
+          className="form-control"
+          validate={[required, email]}
+        />
+      </div>
+      <div className="form-group">
+        <Field
+          component={RenderField}
+          name="password"
+          type="password"
+          label="password"
+          className="form-control"
+          validate={[required, minLength5, maxLength15]}
+        />
+      </div>
+      <button
+        type="submit"
+        className="btn btn-primary btn-block mt-2 d-block ms-auto"
+        disabled={!valid}
+      >
+        Submit
+      </button>
+    </form>
+  );
+};
 
 SingInForm = reduxForm({
-  form: 'login'
+  form: "login",
 })(SingInForm);
