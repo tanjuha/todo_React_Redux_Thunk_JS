@@ -2,6 +2,12 @@ import React from "react";
 import { Component } from "react";
 import { Field } from "redux-form";
 import { reduxForm } from "redux-form";
+import RenderField from './../common/RenderField';
+import {
+  required,
+  minLength5,
+  maxLength200,
+} from "../../utils/validationRules";
 
 export default class EditTodo extends Component {
   componentDidMount() {
@@ -28,19 +34,19 @@ export default class EditTodo extends Component {
   }
 }
 
-let EditTodoForm = (props) => {
+let EditTodoForm = ({handleSubmit, valid}) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="form-group">
-        <label>Titile </label>
         <Field
+          component={RenderField}
           name="title"
+          type="textarea"
           className="form-control"
-          component="textarea"
-          type="text"
+          validate={[required, minLength5, maxLength200]}
         />
       </div>
-      <button type="submit" className="btn btn-primary btn-block mt-2 d-block ms-auto">
+      <button type="submit" disabled={!valid} className="btn btn-primary btn-block mt-2 d-block ms-auto">
         Submit
       </button>
     </form>
