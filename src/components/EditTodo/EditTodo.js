@@ -8,6 +8,7 @@ import {
   maxLength200,
 } from "../../utils/validationRules";
 import { connect } from "react-redux";
+import propTypes from "prop-types";
 
 export default class EditTodo extends Component {
   constructor(props) {
@@ -71,3 +72,11 @@ EditTodoForm = connect((state) => ({
     title: state.todos.todo.title,
   },
 }))(EditTodoForm);
+
+EditTodo.propTypes = {
+  getTodo: propTypes.func,
+  match: propTypes.object,
+  editTodo: propTypes.func,
+  history: propTypes.object,
+  todo: propTypes.object,
+};

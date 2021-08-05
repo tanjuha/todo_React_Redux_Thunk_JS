@@ -8,6 +8,7 @@ import {
   minLength5,
   maxLength200,
 } from "../../utils/validationRules";
+import propTypes from "prop-types";
 
 export default class CreateTodo extends Component {
   render() {
@@ -26,6 +27,10 @@ export default class CreateTodo extends Component {
     );
   }
 }
+
+CreateTodo.propTypes = {
+  createTodo: propTypes.func,
+};
 
 let CreateTodoForm = ({ handleSubmit, valid }) => {
   return (

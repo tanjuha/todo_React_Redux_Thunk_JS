@@ -10,7 +10,7 @@ import {
 } from "../actions/actionTypes";
 const initialState = {
   todos: [],
-  todo: [],
+  todo: {},
   isLoading: false,
   error: false,
 };

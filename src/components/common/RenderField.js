@@ -1,4 +1,5 @@
 import React from "react";
+import propTypes from "prop-types";
 
 export default function RenderField({
   input,
@@ -23,3 +24,14 @@ export default function RenderField({
     </div>
   );
 }
+
+RenderField.propTypes = {
+  input: propTypes.object,
+  label: propTypes.string,
+  type: propTypes.string,
+  className: propTypes.string,
+  meta: propTypes.object,
+  touched: propTypes.bool,
+  error: propTypes.bool,
+  warning: propTypes.bool,
+};

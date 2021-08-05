@@ -7,6 +7,7 @@ import {
   maxLength15,
 } from "../../utils/validationRules";
 import RenderField from "../common/RenderField";
+import propTypes from "prop-types";
 
 export default class SingIn extends Component {
   handleSubmit = (values) => {
@@ -66,3 +67,8 @@ let SingInForm = ({ handleSubmit, valid }) => {
 SingInForm = reduxForm({
   form: "login",
 })(SingInForm);
+
+
+SingIn.propTypes = {
+  history: propTypes.object
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from "react";
+import propTypes from "prop-types";
 
 export default class Todos extends Component {
   componentDidMount() {
@@ -52,4 +53,14 @@ export default class Todos extends Component {
       );
     });
   }
+}
+
+Todos.propTypes = {
+  getTodos: propTypes.func,
+  getTodo: propTypes.func,
+  history: propTypes.object,
+  isLoading: propTypes.bool,
+  todos: propTypes.array,
+  changeStatusTodo: propTypes.func,
+  deleteTodo: propTypes.func,
 }
