@@ -1,16 +1,18 @@
-import React from "react";
-import { Component } from "react";
+import React, { Component } from "react";
 import { Field } from "redux-form";
 import { reduxForm } from "redux-form";
-import RenderField from './../common/RenderField';
+import RenderField from "./../common/RenderField";
 import {
   required,
   minLength5,
   maxLength200,
 } from "../../utils/validationRules";
+import { connect } from "react-redux";
 
 export default class EditTodo extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+
     this.props.getTodo(this.props.match.params.id);
   }
 
@@ -19,14 +21,17 @@ export default class EditTodo extends Component {
     this.props.editTodo({ id, ...value });
     this.props.history.push("/");
   };
-
   render() {
     return (
       <div className="container">
         <div className="row justify-content-md-center">
           <div className="col-6">
-            <h2>Edit form </h2>
-            <EditTodoForm onSubmit={this.handleSubmit} />
+            {this.props.todo.title ? (
+              <>
+                <h2>Edit form </h2>
+                <EditTodoForm onSubmit={this.handleSubmit} />
+              </>
+            ) : null}
           </div>
         </div>
       </div>
@@ -34,7 +39,7 @@ export default class EditTodo extends Component {
   }
 }
 
-let EditTodoForm = ({handleSubmit, valid}) => {
+let EditTodoForm = ({ handleSubmit, valid }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
@@ -46,7 +51,11 @@ let EditTodoForm = ({handleSubmit, valid}) => {
           validate={[required, minLength5, maxLength200]}
         />
       </div>
-      <button type="submit" disabled={!valid} className="btn btn-primary btn-block mt-2 d-block ms-auto">
+      <button
+        type="submit"
+        disabled={!valid}
+        className="btn btn-primary btn-block mt-2 d-block ms-auto"
+      >
         Submit
       </button>
     </form>
@@ -55,4 +64,10 @@ let EditTodoForm = ({handleSubmit, valid}) => {
 
 EditTodoForm = reduxForm({
   form: "editTodo",
+  enableReinitialize: true,
 })(EditTodoForm);
+EditTodoForm = connect((state) => ({
+  initialValues: {
+    title: state.todos.todo.title,
+  },
+}))(EditTodoForm);

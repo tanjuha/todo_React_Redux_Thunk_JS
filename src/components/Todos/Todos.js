@@ -7,6 +7,7 @@ export default class Todos extends Component {
   }
 
   updateTodo = (id) => {
+    this.props.getTodo(id);
     this.props.history.push(`/edit/${id}`);
   };
 
