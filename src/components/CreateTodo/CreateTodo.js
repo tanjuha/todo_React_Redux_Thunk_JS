@@ -1,14 +1,7 @@
 import React from "react";
 import { Component } from "react";
-import { Field } from "redux-form";
-import { reset, reduxForm } from "redux-form";
-import RenderField from "../common/RenderField";
-import {
-  required,
-  minLength5,
-  maxLength200,
-} from "../../utils/validationRules";
 import propTypes from "prop-types";
+import CreateTodoForm from "../CreateTodoForm/CreateTodoForm";
 
 export default class CreateTodo extends Component {
   render() {
@@ -19,7 +12,7 @@ export default class CreateTodo extends Component {
       <div className="container">
         <div className="row justify-content-md-center">
           <div className="col-6">
-            <h2>Add todo </h2>
+            <h2>Create todo </h2>
             <CreateTodoForm onSubmit={handleSubmit} />
           </div>
         </div>
@@ -31,34 +24,3 @@ export default class CreateTodo extends Component {
 CreateTodo.propTypes = {
   createTodo: propTypes.func,
 };
-
-let CreateTodoForm = ({ handleSubmit, valid }) => {
-  return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <Field
-          component={RenderField}
-          name="title"
-          type="textarea"
-          className="form-control"
-          validate={[required, minLength5, maxLength200]}
-        />
-      </div>
-      <button
-        disabled={!valid}
-        type="submit"
-        className="btn btn-primary btn-block mt-2 d-block ms-auto"
-      >
-        Submit
-      </button>
-    </form>
-  );
-};
-
-const clearFieldAfterSubmit = (result, dispatch) =>
-  dispatch(reset('createTodo'));
-
-CreateTodoForm = reduxForm({
-  form: "createTodo",
-  onSubmitSuccess: clearFieldAfterSubmit,
-})(CreateTodoForm);

@@ -1,14 +1,6 @@
 import React, { Component } from "react";
-import { Field } from "redux-form";
-import { reduxForm } from "redux-form";
-import RenderField from "./../common/RenderField";
-import {
-  required,
-  minLength5,
-  maxLength200,
-} from "../../utils/validationRules";
-import { connect } from "react-redux";
 import propTypes from "prop-types";
+import EditTodoForm from "../EditTodoForm/EditTodoForm";
 
 export default class EditTodo extends Component {
   constructor(props) {
@@ -29,7 +21,7 @@ export default class EditTodo extends Component {
           <div className="col-6">
             {this.props.todo.title ? (
               <>
-                <h2>Edit form </h2>
+                <h2>Edit title todo </h2>
                 <EditTodoForm onSubmit={this.handleSubmit} />
               </>
             ) : null}
@@ -39,39 +31,6 @@ export default class EditTodo extends Component {
     );
   }
 }
-
-let EditTodoForm = ({ handleSubmit, valid }) => {
-  return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <Field
-          component={RenderField}
-          name="title"
-          type="textarea"
-          className="form-control"
-          validate={[required, minLength5, maxLength200]}
-        />
-      </div>
-      <button
-        type="submit"
-        disabled={!valid}
-        className="btn btn-primary btn-block mt-2 d-block ms-auto"
-      >
-        Submit
-      </button>
-    </form>
-  );
-};
-
-EditTodoForm = reduxForm({
-  form: "editTodo",
-  enableReinitialize: true,
-})(EditTodoForm);
-EditTodoForm = connect((state) => ({
-  initialValues: {
-    title: state.todos.todo.title,
-  },
-}))(EditTodoForm);
 
 EditTodo.propTypes = {
   getTodo: propTypes.func,

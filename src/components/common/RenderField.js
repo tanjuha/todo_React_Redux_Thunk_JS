@@ -7,15 +7,16 @@ export default function RenderField({
   type,
   className,
   meta: { touched, error, warning },
+  placeholder
 }) {
   return (
     <div>
       {type === "textarea" ? (
-        <textarea {...input} type={type} className={className}></textarea>
+        <textarea {...input} type={type} className={className} placeholder={placeholder}></textarea>
       ) : (
         <>
           <label>{label}</label>
-          <input {...input} type={type} className={className} />
+          <input {...input} type={type} className={className} placeholder={placeholder} />
         </>
       )}
       {touched &&
@@ -30,6 +31,7 @@ RenderField.propTypes = {
   label: propTypes.string,
   type: propTypes.string,
   className: propTypes.string,
+  placeholder: propTypes.string,
   meta: propTypes.object,
   touched: propTypes.bool,
   error: propTypes.bool,
