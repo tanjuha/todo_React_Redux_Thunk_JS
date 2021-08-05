@@ -1,7 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import { Field } from "redux-form";
-import { reduxForm } from "redux-form";
+import { reset, reduxForm } from "redux-form";
 import RenderField from "../common/RenderField";
 import {
   required,
@@ -55,6 +55,10 @@ let CreateTodoForm = ({ handleSubmit, valid }) => {
   );
 };
 
+const clearFieldAfterSubmit = (result, dispatch) =>
+  dispatch(reset('createTodo'));
+
 CreateTodoForm = reduxForm({
   form: "createTodo",
+  onSubmitSuccess: clearFieldAfterSubmit,
 })(CreateTodoForm);
