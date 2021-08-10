@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import "./alert.css";
 
-export default function Message({ status, message }) {
+export default function Alert({ id, status, text }) {
   const [isShow, setShow] = useState(true);
 
   useEffect(() => {
@@ -14,8 +15,8 @@ export default function Message({ status, message }) {
   }, []);
 
   return isShow ? (
-    <div className={`container alert alert-${status}`} role="alert">
-      {message}
+    <div key={id} className={`alert alert-${status} notification`} role="alert">
+      {text}
     </div>
   ) : null;
 }
