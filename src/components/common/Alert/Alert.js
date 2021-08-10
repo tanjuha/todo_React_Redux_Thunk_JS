@@ -15,7 +15,7 @@ function Alert(props) {
     return () => {
       clearTimeout(timeShowMsg);
     };
-  }, []);
+  });
 
   return isShow ? (
     <div className={`alert alert-${props.status} notification`} role="alert">
