@@ -7,6 +7,7 @@ export default function Alert({ status, text }) {
   useEffect(() => {
     const timeShowMsg = setTimeout(() => {
       setShow(false);
+      
     }, 5000);
 
     return () => {
