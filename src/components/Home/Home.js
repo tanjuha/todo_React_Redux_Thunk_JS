@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Todos from "../../conteiners/Todos";
 import CreateTodo from "./../../conteiners/CreateTodo";
 import propTypes from "prop-types";
+import Message from "../../components/common/Alert/Alert";
 
 export default class Home extends Component {
   onSingOut = () => {
@@ -19,6 +20,7 @@ export default class Home extends Component {
         >
           Sing Out
         </button>
+        <Message status="info" message="test test" />
         <CreateTodo />
         <div className="container">
           <Todos />
