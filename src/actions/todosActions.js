@@ -7,6 +7,7 @@ import {
   CREATE_TODO,
   TODO,
   UPDATE_STATUS_TODO,
+  CLEARE_MESSAGE
 } from "./actionTypes";
 
 export function todosHasErrored(payload) {
@@ -63,4 +64,11 @@ export function updateStatusTodo(payload) {
     type: UPDATE_STATUS_TODO,
     payload,
   };
+}
+
+export function cleareMesage(payload) {
+  return {
+    type: CLEARE_MESSAGE,
+    payload
+  }
 }

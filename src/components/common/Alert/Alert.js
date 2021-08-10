@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./alert.css";
+import { cleareMesage } from "../../../actions/todosActions";
+import { connect } from "react-redux";
 
-export default function Alert({ status, text }) {
+function Alert(props) {
   const [isShow, setShow] = useState(true);
 
   useEffect(() => {
     const timeShowMsg = setTimeout(() => {
       setShow(false);
-      
-    }, 5000);
+      props.cleareMesage(props.id);
+    }, 3000);
 
     return () => {
       clearTimeout(timeShowMsg);
@@ -16,8 +18,16 @@ export default function Alert({ status, text }) {
   }, []);
 
   return isShow ? (
-    <div className={`alert alert-${status} notification`} role="alert">
-      {text}
+    <div className={`alert alert-${props.status} notification`} role="alert">
+      {props.text}
     </div>
   ) : null;
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    cleareMesage: (id) => dispatch(cleareMesage(id)),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(Alert);

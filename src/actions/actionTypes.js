@@ -12,4 +12,5 @@ export const EDIT_TODO = "EDIT_TODO";
 export const CREATE_TODO = "CREATE_TODO";
 export const UPDATE_STATUS_TODO = "UPDATE_STATUS_TODO";
 
-// 
+// alert
+export const CLEARE_MESSAGE = "CLEARE_MESSAGE"

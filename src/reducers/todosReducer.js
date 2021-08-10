@@ -7,13 +7,14 @@ import {
   EDIT_TODO,
   CREATE_TODO,
   UPDATE_STATUS_TODO,
+  CLEARE_MESSAGE,
 } from "../actions/actionTypes";
 const initialState = {
   todos: [],
   todo: {},
   isLoading: false,
   error: false,
-  message: []
+  message: [],
 };
 
 export default function todosReducer(state = initialState, action) {
@@ -41,19 +42,32 @@ export default function todosReducer(state = initialState, action) {
     case CREATE_TODO:
       return {
         ...state,
-        message:  [{id: Date.now(), status: "success", text: "Create todo successfully"}, ...state.message],
+        message: [
+          {
+            id: Date.now(),
+            status: "success",
+            text: "Create todo successfully",
+          },
+          ...state.message,
+        ],
         todos: [action.payload, ...state.todos],
       };
     case DELETE_TODO:
       return {
         ...state,
-        message:  [{id: Date.now(), status: "info", text: "Delete todo successfully"}, ...state.message],
+        message: [
+          { id: Date.now(), status: "info", text: "Delete todo successfully" },
+          ...state.message,
+        ],
         todos: state.todos.filter((todo) => todo.id !== action.payload),
       };
     case UPDATE_STATUS_TODO:
       return {
         ...state,
-        message:  [{id: Date.now(), status: "info", text: "Update todo successfully"}, ...state.message],
+        message: [
+          { id: Date.now(), status: "info", text: "Update todo successfully" },
+          ...state.message,
+        ],
         todos: state.todos.map((todo) => {
           if (todo.id === action.payload.id) {
             return {
@@ -69,7 +83,10 @@ export default function todosReducer(state = initialState, action) {
     case EDIT_TODO:
       return {
         ...state,
-        message:  [{id: Date.now(), status: "info", text: "Edit todo"}, ...state.message],
+        message: [
+          { id: Date.now(), status: "info", text: "Edit todo" },
+          ...state.message,
+        ],
         todos: state.todos.map((todo) => {
           if (todo.id === action.payload.id) {
             return {
@@ -80,6 +97,12 @@ export default function todosReducer(state = initialState, action) {
             return todo;
           }
         }),
+      };
+
+    case CLEARE_MESSAGE:
+      return {
+        ...state,
+        message: state.message.filter((msg) => msg.id !== action.payload),
       };
 
     default:
