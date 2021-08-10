@@ -18,7 +18,7 @@ export default class Home extends Component {
         {!isEmptyObj(this.props.message) ? (
           <div className="alert-container">
             {this.props.message.map((msg) => {
-              return <Alert id={msg.id} status={msg.status} text={msg.text} />;
+              return <Alert key={msg.id} status={msg.status} text={msg.text} />;
             })}
           </div>
         ) : null}
