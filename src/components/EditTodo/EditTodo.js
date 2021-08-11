@@ -3,9 +3,7 @@ import propTypes from "prop-types";
 import EditTodoForm from "../EditTodoForm/EditTodoForm";
 
 export default class EditTodo extends Component {
-  constructor(props) {
-    super(props);
-
+  componentDidMount() {
     this.props.getTodo(this.props.match.params.id);
   }
 

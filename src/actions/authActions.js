@@ -7,5 +7,3 @@ export const requestSignIn = () => ({
 export const requestSignOut = () => ({
   type: REQUEST_SING_OUT,
 });
-
-

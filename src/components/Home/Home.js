@@ -1,41 +1,45 @@
-import React, { Component } from "react";
+import React from "react";
 import Todos from "../../conteiners/Todos";
 import CreateTodo from "./../../conteiners/CreateTodo";
 import propTypes from "prop-types";
 import { isEmptyObj } from "../../utils/helpers";
-import Alert from './../../conteiners/Alert';
+import Alert from "./../../conteiners/Alert";
 
-
-export default class Home extends Component {
-  onSingOut = () => {
+export default function Home({ requestSignOut, history, message }) {
+  const onSingOut = () => {
     localStorage.setItem("isAuthenticated", JSON.stringify(false));
-    this.props.requestSignOut();
-    this.props.history.push("/login");
+    requestSignOut();
+    history.push("/login");
   };
 
-  render() {
-    return (
-      <>
-        {!isEmptyObj(this.props.message) ? (
-          <div className="alert-container">
-            {this.props.message.map((msg) => {
-              return <Alert id= {msg.id} key={msg.id} status={msg.status} text={msg.text} />;
-            })}
-          </div>
-        ) : null}
-        <button
-          onClick={this.onSingOut}
-          className="btn btn-danger m-2 d-block ms-auto"
-        >
-          Sing Out
-        </button>
-        <CreateTodo />
-        <div className="container">
-          <Todos />
+  return (
+    <>
+      {!isEmptyObj(message) ? (
+        <div className="alert-container">
+          {message.map((msg) => {
+            return (
+              <Alert
+                id={msg.id}
+                key={msg.id}
+                status={msg.status}
+                text={msg.text}
+              />
+            );
+          })}
         </div>
-      </>
-    );
-  }
+      ) : null}
+      <button
+        onClick={onSingOut}
+        className="btn btn-danger m-2 d-block ms-auto"
+      >
+        Sing Out
+      </button>
+      <CreateTodo />
+      <div className="container">
+        <Todos />
+      </div>
+    </>
+  );
 }
 
 Home.propTypes = {
