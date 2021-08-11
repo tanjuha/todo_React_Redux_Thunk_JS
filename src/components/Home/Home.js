@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import Todos from "../../conteiners/Todos";
 import CreateTodo from "./../../conteiners/CreateTodo";
 import propTypes from "prop-types";
-import Alert from "../../components/common/Alert/Alert";
 import { isEmptyObj } from "../../utils/helpers";
+import Alert from './../../conteiners/Alert';
+
 
 export default class Home extends Component {
   onSingOut = () => {

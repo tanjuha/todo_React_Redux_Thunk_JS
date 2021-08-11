@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./alert.css";
-import { cleareMesage } from "../../../actions/todosActions";
-import { connect } from "react-redux";
 import propTypes from 'prop-types'
-function Alert({cleareMesage, id, status, text}) {
+export default function Alert({cleareMesage, id, status, text}) {
   const [isShow, setShow] = useState(true);
 
   useEffect(() => {
@@ -30,13 +28,3 @@ Alert.prototype = {
   status: propTypes.string,
   text: propTypes.string
 }
-
-
-
-function mapDispatchToProps(dispatch) {
-  return {
-    cleareMesage: (id) => dispatch(cleareMesage(id)),
-  };
-}
-
-export default connect(null, mapDispatchToProps)(Alert);
